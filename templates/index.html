@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massive mail sender</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-8 dark:bg-slate-800">
+
+    <a href="{{ url_for('logout') }}" class="absolute right-10 top-2 rounded p-2 bg-gray-800 text-white">Logout</a>
+
+    <div class="max-w-4xl mx-auto p-6 bg-white dark:bg-slate-900 shadow-lg rounded-lg">
+        <h1 class="text-2xl font-semibold text-center text-gray-700 dark:text-gray-100 mb-6">Massive mail sender</h1>
+
+        <form action="#" method="POST" class="space-y-6">
+            <div>
+                <label for="email_list" class="block text-gray-700 dark:text-gray-100 font-medium">Email address (one per line)</label>
+                <textarea name="email_list" id="email_list" required rows="6" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="One or more email address. One per line"></textarea>
+            </div>
+
+             <div>
+                <label for="subject" class="block text-gray-700 dark:text-gray-100 font-medium">Subject</label>
+                <input type="text" name="subject" required id="subject" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type the mail subject">
+            </div>
+
+            <div>
+                <label for="html_content" class="block text-gray-700 dark:text-gray-100 font-medium">Mail Body HTML</label>
+                <textarea name="html_content" required id="html_content" rows="8" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type here the mail body..."></textarea>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Send now</button>
+            </div>
+
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="mt-8">
+                {% for category, message in messages %}
+                    <li class="p-4 rounded {% if category == 'success' %}bg-green-200 text-green-800{% elif category == 'error' %}bg-red-200 text-red-800{% endif %}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+</html>
